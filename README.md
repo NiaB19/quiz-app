@@ -1,230 +1,233 @@
 Quiz App
-A full-stack trivia quiz application with user authentication, score tracking, and leaderboards.
-🎯 Features
+A full-stack quiz application built with Node.js, Express, MongoDB, and the Open Trivia Database API. Users can create accounts, take quizzes, track their scores, and compete on a global leaderboard.
+🌐 Live Demo
+Deployed App: https://quiz-app-g1zl.onrender.com
+👤 Developer
+Nia Bardavelidze - Full Stack Development (All features, frontend, backend, database integration, and deployment)
+✨ Features
 Core Features
 
-Home Page - Welcome page with login/signup options and quiz start button
-Quiz Page - Interactive 10-question multiple choice quiz
-Results Page - Displays quiz score and saves to user profile
-User Authentication - Secure signup/login with password hashing
-User Profile - View personal quiz history and scores
-Leaderboard - Top 10 players ranked by best score with user rank display
-Play Again - Restart quiz from results page
+Home Page - Landing page where users can navigate to different sections of the app
+Quiz Game - Interactive 10-question multiple-choice quiz powered by the Open Trivia Database API
+Results Page - Displays user's score after completing the quiz
+User Authentication - Secure signup and login system with password hashing using bcrypt
+Score Tracking - User scores are automatically saved to MongoDB after each quiz attempt
+User Profile - Personal dashboard showing complete quiz history with dates and scores
+Leaderboard - Displays top 10 players globally and shows current user's rank
 
 Technical Features
 
-Questions fetched from Open Trivia Database API
-Answers shuffled randomly for each question
-HTML entity decoding for special characters
-Session-based authentication
-MongoDB database for user and score storage
-Responsive design with modern UI
+Session Management - Express sessions for maintaining user authentication state
+Password Security - Bcrypt hashing for secure password storage
+MongoDB Integration - NoSQL database for storing users, scores, and quiz history
+API Integration - Dynamic question fetching from Open Trivia Database
+Responsive Design - Clean, modern UI with custom CSS styling
+Question Randomization - Shuffled answer options and varied questions on each playthrough
 
-👤 Developer
-Nia Bardavelidze - Solo Developer
-My Contributions:
+🛠️ Technology Stack
+Backend:
 
-Designed and implemented all frontend pages (HTML/CSS/JavaScript)
-Built backend server with Express.js and RESTful API routes
-Integrated MongoDB database for user authentication and score storage
-Implemented secure authentication system with bcrypt password hashing
-Created user profile and leaderboard features
-Integrated Open Trivia Database API for dynamic quiz questions
-Deployed application to production environment
-Wrote comprehensive documentation
+Node.js
+Express.js v5.2.1
+MongoDB v7.0.0
+Express-session v1.18.2
+Bcrypt v6.0.0
+dotenv v17.2.3
 
-🛠️ Technologies Used
+Frontend:
 
-Frontend: HTML5, CSS3, JavaScript (ES6+)
-Backend: Node.js, Express.js
-Database: MongoDB
-Authentication: bcrypt, express-session
-API: Open Trivia Database API
-Deployment: [Render/Heroku]
+HTML5
+CSS3 (Custom styling with CSS variables)
+Vanilla JavaScript
 
-📁 Project Structure
-QUIZAPP/
-├── models/
-│   └── db.js                    
-├── node_modules/
-├── public/
-│   ├── routes/
-│   │   ├── app.js
-│   │   ├── index.js
-│   │   ├── leaderboard.js
-│   │   ├── profile.js
-│   │   ├── results.js
-│   │   ├── signin.js
-│   │   └── signup.js
-│   ├── index.html
-│   ├── leaderboard.html
-│   ├── profile.html
-│   ├── quiz.html
-│   ├── results.html
-│   ├── signin.html
-│   ├── signup.html
-│   └── style.css
-├── .env
-├── .gitignore
-├── package.json
-├── package-lock.json
-├── README.md
-└── server.js
+API:
 
-🚀 Setup Instructions
-Prerequisites
+Open Trivia Database API (https://opentdb.com/)
 
-Node.js (v14 or higher)
-MongoDB Atlas account (free tier)
+Hosting:
+
+Render (Web Service)
+MongoDB Atlas (Database)
+
+📋 Prerequisites
+Before running this project, make sure you have:
+
+Node.js (v20.x or higher)
+MongoDB Atlas account (or local MongoDB installation)
 Git
 
-Installation
+🚀 Installation & Setup
+1. Clone the Repository
+bashgit clone https://github.com/NiaB19/quiz-app
+cd quizapp
+2. Install Dependencies
+bashnpm install
+3. Environment Configuration
+Create a .env file in the root directory:
+envATLAS_URI=mongodb+srv://username:password@cluster.mongodb.net/quizApp?retryWrites=true&w=majority
+SESSION_SECRET=your-secret-key-here
+PORT=3000
+⚠️ REPLACE THESE:
 
-Clone the repository
+username - Your MongoDB Atlas username
+password - Your MongoDB Atlas password
+cluster - Your MongoDB Atlas cluster address
+your-secret-key-here - A random secret string for sessions
 
-bash   git clone [your-github-repo-url]
-   cd QuizApp
+4. Database Setup
+The application will automatically create the required collections (users and scores) when you first run it. Make sure your MongoDB Atlas cluster is accessible.
+5. Start the Server
+Development mode (with nodemon):
+bashnpx nodemon server.js
+Production mode:
+bashnpm start
+The server will start on http://localhost:3000
+📁 Project Structure
+quizapp/
+│
+├── models/
+│   └── db.js                 # MongoDB connection logic
+│
+├── public/
+│   ├── routes/
+│   │   ├── app.js           # Quiz game logic
+│   │   ├── index.js         # Home page logic
+│   │   ├── signin.js        # Sign in functionality
+│   │   ├── signup.js        # Sign up functionality
+│   │   ├── results.js       # Results page logic
+│   │   ├── profile.js       # User profile logic
+│   │   └── leaderboard.js   # Leaderboard logic
+│   │
+│   ├── index.html           # Home page
+│   ├── signin.html          # Login page
+│   ├── signup.html          # Registration page
+│   ├── quiz.html            # Quiz game page
+│   ├── results.html         # Quiz results page
+│   ├── profile.html         # User profile page
+│   ├── leaderboard.html     # Leaderboard page
+│   └── style.css            # Global styles
+│
+├── server.js                # Express server & API routes
+├── package.json             # Project dependencies
+├── .env                     # Environment variables (not in repo)
+└── README.md               # This file
+🔌 API Endpoints
+Authentication Routes
 
-Install dependencies
+POST /api/signup - Register a new user
+POST /api/signin - Login existing user
+POST /api/logout - Logout current user
+GET /api/session - Check if user is logged in
 
-bash   npm install
-
-Create .env file in the root directory
-
-env   MONGODB_URI=your_mongodb_connection_string
-   SESSION_SECRET=your_random_secret_key
-   PORT=3000
-
-Set up MongoDB
-
-Create a free account at MongoDB Atlas
-Create a new cluster
-Create a database user
-Get your connection string
-Replace <password> with your database user password
-Paste into .env file
-
-
-Run the server
-
-bash   node server.js
-
-Open in browser
-
-   http://localhost:3000
-📝 API Endpoints
-Authentication
-
-POST /api/signup - Register new user
-POST /api/signin - Login user
-POST /api/logout - Logout user
-GET /api/session - Check login status
-
-Quiz
+Quiz Routes
 
 GET /api/questions?amount=10 - Fetch quiz questions from Trivia API
-POST /api/save-score - Save quiz score (requires login)
+POST /api/save-score - Save user's quiz score
 
-User Data
+User Routes
 
-GET /api/profile - Get user's quiz history (requires login)
+GET /api/profile - Get user's quiz history
 GET /api/leaderboard - Get top 10 players and user rank
 
-🗄️ Database Schema
-Users Collection
-javascript{
-  _id: ObjectId,
-  firstname: String,
-  email: String,
-  password: String (hashed),
-  createdAt: Date
-}
-Scores Collection
-javascript{
-  _id: ObjectId,
-  userId: String,
-  username: String,
-  score: Number,
-  total: Number,
-  playedAt: Date
-}
 🎮 How to Use
 
-Sign Up - Create an account with your name, email, and password
+Sign Up - Create a new account with your name, email, and password
 Sign In - Log in with your credentials
 Start Quiz - Click "Start Quiz" from the home page
-Answer Questions - Select answers for 10 multiple choice questions
-View Results - See your score and automatic save to profile
-Check Profile - View your quiz history and scores
-View Leaderboard - See top 10 players and your ranking
+Answer Questions - Select answers for 10 multiple-choice questions
+View Results - See your score and have it automatically saved
+Check Profile - View your complete quiz history
+View Leaderboard - See where you rank among all players
 
-🌐 Deployment
-Deploy to Render (Free)
+🎨 Design Features
 
-Push code to GitHub
-Go to Render.com and sign up
-Create new "Web Service"
-Connect your GitHub repository
-Configure:
-
-Build Command: npm install
-Start Command: node server.js
-
-
-Add environment variables in Render dashboard:
-
-MONGODB_URI
-SESSION_SECRET
-
-
-Deploy!
-
-Deploy to Heroku (Free)
-
-Install Heroku CLI
-Login: heroku login
-Create app: heroku create your-quiz-app-name
-Set environment variables:
-
-bash   heroku config:set MONGODB_URI=your_connection_string
-   heroku config:set SESSION_SECRET=your_secret
-
-Deploy: git push heroku main
+Color Scheme: Sea moss green (#2f7f6f) and soft pink (#f4a7b9)
+Responsive Layout: Mobile-friendly design
+Interactive Elements: Hover effects and smooth transitions
+Clean UI: Modern, minimalist interface with SVG icons
 
 🔒 Security Features
 
-Passwords hashed with bcrypt (10 salt rounds)
+Password hashing with bcrypt (10 salt rounds)
 Session-based authentication
-Environment variables for sensitive data
-Input validation on all forms
-Protected API routes requiring authentication
+Protected routes requiring login
+SQL injection prevention through MongoDB
+Environment variable protection
 
-🐛 Known Issues & Future Improvements
+🚀 Deployment (Render)
+Steps to Deploy:
 
-Add timer for each question
-Add ability to choose number of questions
-Add different difficulty levels
-Add category selection
-Add password strength requirements
-Add email verification
-Add forgot password functionality
-Add profile picture upload
+Push to GitHub
 
-📚 Resources Used
+bash   git add .
+   git commit -m "Ready for deployment"
+   git push origin main
 
-Open Trivia Database API
-MongoDB Atlas Documentation
-Express.js Documentation
-bcrypt Documentation
+Create Render Web Service
 
-📄 License
-This project was created for educational purposes as part of [Course Name] at [University Name].
+Go to render.com
+Click "New +" → "Web Service"
+Connect your GitHub repository
+Configure:
+
+Name: quizapp (or your preferred name)
+Environment: Node
+Build Command: npm install
+Start Command: npm start
+Plan: Free
+
+
+
+
+Add Environment Variables in Render
+
+Go to your web service dashboard
+Click "Environment"
+Add:
+
+ATLAS_URI = your MongoDB connection string
+SESSION_SECRET = your secret key
+
+
+
+
+Deploy
+
+Render will automatically deploy your app
+Your app will be live at https://your-app-name.onrender.com
+
+
+
+Important Deployment Notes:
+
+Free tier limitations: Apps may sleep after inactivity (first request takes 30-60 seconds)
+MongoDB Atlas: Ensure IP whitelist allows connections from anywhere (0.0.0.0/0)
+Session cookies: Already configured for deployment in server.js
+
+🐛 Known Issues & Limitations
+
+Free tier Render apps sleep after 15 minutes of inactivity
+No password reset functionality
+No email verification
+Quiz questions are always in English (API limitation)
+Limited to multiple-choice questions only
+
+🔮 Future Enhancements (Potential)
+
+ Timer for each question or entire quiz
+ Ability to select number of questions
+ Difficulty level selection
+ Category-based quizzes
+ Social sharing of scores
+ Achievements and badges
+ Password reset via email
+ Profile picture upload
+ Dark mode toggle
+
+📝 License
+This project is for educational purposes as part of a web development course.
 🙏 Acknowledgments
 
-Professor [Name] for project guidelines
-Open Trivia Database for free API
-Team members for their contributions
-
-
-Live Demo: [Your deployed app URL here]
-GitHub Repository: [Your GitHub repo URL here]
+Open Trivia Database for providing free quiz questions
+MongoDB Atlas for database hosting
+Render for free web hosting
