@@ -2,7 +2,7 @@ Quiz App
 
 A full-stack quiz application built with Node.js, Express, MongoDB, and the Open Trivia Database API, demonstrating end-to-end software development, API integration, authentication, and production deployment.
 
-🔗 Live Demo: [https://quiz-app-g1zl.onrender.com
+🔗 Live Demo: https://quiz-app-g1zl.onrender.com
 
 🔗 GitHub: https://github.com/NiaB19/quiz-app
 
